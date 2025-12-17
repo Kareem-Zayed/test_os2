@@ -1,1 +1,20 @@
+name: Windows Test
 
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Testing GitHub action
+        run: echo %CD%  # equivalent to pwd in Windows
+
+      - name: Testing Printing
+        run: echo Ahmad
