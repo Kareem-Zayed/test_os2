@@ -1,4 +1,4 @@
-name: Windows Test
+name: Docker CI Windows
 
 on:
   push:
@@ -10,11 +10,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Testing GitHub action
-        run: echo %CD%  # equivalent to pwd in Windows
+      - name: Login to Docker hub
+        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Testing Printing
-        run: echo Ahmad
+      - name: Building docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/myimage .
+
+      - name: Pushing to Docker hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/myimage
