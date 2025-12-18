@@ -2,9 +2,10 @@ FROM alpine
 
 WORKDIR /app
 
+
 COPY app.py .
 
-# Install Python3 + Flask via apk
-RUN apk add --no-cache python3 py3-flask
+RUN apk add --no-cache python3
+
 
 CMD ["python3", "app.py"]
